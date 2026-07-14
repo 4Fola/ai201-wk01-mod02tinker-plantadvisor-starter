@@ -23,7 +23,7 @@ app.py  ────────────────────────
   │  run_agent(user_message, history)
   ▼
 agent.py  ────────────────────────────────────────────────────────►  Groq LLM
-  │                                                              (llama-3.3-70b)
+  │                                                              (llama-4-scout)
   │  Tool call loop:
   │    LLM decides which tool to call
   │    dispatch_tool() routes to the right function
