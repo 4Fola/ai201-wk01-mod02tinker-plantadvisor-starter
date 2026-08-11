@@ -73,7 +73,13 @@ the broadest net, so they go last.
 *Aliases are stored as a list of strings. How will you check if the normalized input matches any alias in the list? Write your approach in pseudocode or plain English.*
 
 ```
-[your answer here]
+[NB: Aliases will be handled through the following three (3) approaches:
+- **Normalization**: Strip leading/trailing whitespace and convert input to lowercase.
+- **Search Hierarchy**:
+  1. Direct key match against database slugs (e.g., `snake_plant`).
+  2. Case-insensitive match against `display_name` (e.g., `Snake Plant`).
+  3. Case-insensitive match against any element in the `aliases` array (e.g., `mother-in-law's tongue`, `sansevieria`).
+- **Data Structure Optimization**: Performs O(N) scan over the local dataset (acceptable for small datasets) or pre-indexed lookup map for O(1) performance at scale.]
 ```
 
 ---
@@ -83,12 +89,18 @@ the broadest net, so they go last.
 *When a plant isn't found, the agent will read your message and use it to decide what to tell the user. Write the exact string you'll return — make it useful to the agent, not just to a human reading logs.*
 
 ```
-[your answer here]
+NB:
+- If no match is found, return:
+  `{"found": false, "message": "No plant matching '[plant_name]' found in the database."}`
+- **Reasoning**: This provides clear context to the LLM that the query failed without throwing an unhandled exception, allowing the LLM to acknowledge missing data and fall back to general guidance.
 ```
 
 ---
 
 #### Implementation Notes
+- Loaded from `data/plants.json`.
+- Safely handles missing keys or non-string inputs.
+- Always returns standard Python dictionary structured with a boolean `found` key.
 
 *Fill this in after implementing and running the app.*
 
@@ -110,6 +122,9 @@ the broadest net, so they go last.
 ---
 
 ## Function 2: `get_seasonal_conditions()`
+
+### Description
+Retrieves current or specified seasonal environmental conditions (light hours, ambient temperature, humidity recommendations) to adjust plant care advice.
 
 ### Input / Output Contract
 
@@ -182,7 +197,10 @@ The full season dict from `_season_data`, plus a `detected_season` boolean. Exam
 
 #### Implementation Notes
 
-*Fill this in after testing.*
+### Implementation Notes
+- Pre-implemented tool.
+- Auto-detects season from system calendar if no explicit season argument is passed.
+- Always returns a valid dictionary.
 
 **Test: does calling with `season=None` return the correct season for the current month?**
 ```

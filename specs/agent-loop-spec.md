@@ -128,6 +128,9 @@ for tool_call in assistant_message.tool_calls:
 
 *The loop should stop when: (a) the LLM returns a response with no tool calls, OR (b) the MAX_TOOL_ROUNDS limit is reached. Describe how you will detect each condition and what you will return in each case.*
 
+- **Condition 1 (Normal Completion)**: Model returns a response with `tool_calls == None` and non-empty `content`. Return `message.content`.
+- **Condition 2 (Safety Cap)**: Iteration count reaches `MAX_TOOL_ROUNDS` (5). Exit loop, append safety directive to model, and generate final response without additional tool calls.
+
 ```
 [your answer here]
 ```
@@ -139,14 +142,24 @@ for tool_call in assistant_message.tool_calls:
 *Once the loop exits because there are no more tool calls, how do you extract the text content from the response object? What field holds the string you should return?*
 
 ```
-[your answer here]
+- Content is extracted directly from `response.choices[0].message.content`.
 ```
+
+## Tool Result Message Ordering
+- **Strict Rule**: Assistant message containing `tool_calls` **must** be appended to `messages` BEFORE tool result messages containing matching `tool_call_id`. Reversing this order breaks Groq API validation.
 
 ---
 
-## Implementation Notes
+## Implementation Notes & Execution Trace
 
-*Fill this in after implementing and testing.*
+```text
+User Question: "How should I water my pothos in winter?"
+Iteration 1: LLM requests tool call -> lookup_plant(plant_name="pothos")
+Tool Result: {"found": true, "plant": {...}}
+Iteration 2: LLM requests tool call -> get_seasonal_conditions(season="winter")
+Tool Result: {"season": "winter", "watering_adjustment": "reduce"}
+Iteration 3: LLM generates final response synthesizing plant + seasonal data.
+Loop Exits.
 
 **Trace of a working agent turn (what tools were called and in what order):**
 
