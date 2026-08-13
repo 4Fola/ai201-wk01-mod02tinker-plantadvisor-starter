@@ -132,4 +132,61 @@ def run_agent(user_message: str, history: list) -> str:
 
     Before writing code, complete specs/agent-loop-spec.md.
     """
-    return "🌱 Agent not yet implemented. Complete Milestone 2 to activate the Plant Advisor."
+    # return "🌱 Agent not yet implemented. Complete Milestone 2 to activate the Plant Advisor."
+
+    # Milsetone 2: Step 1 - Build Messages List
+    messages = [{"role": "sytem", "content": SYSTEM_PROMPT}]
+
+    # Format and append historical context from Gradio history
+    if history:
+        for item in history:
+            if isinstance(item, dict):
+                messages.append(item)
+            elif isinstance(item, (list, tuple)) and len(item) == 2:
+                messages.append({"role": "assistant", "content": item[1]})
+
+    # Append cuurent user turn
+    messages.append({"role": "user", "content": user_message})
+
+    # Milestone 2: Step 2 & 3 | ReAct Agent Tool Execution Loop
+    for _ in range(MAX_TOOL_ROUNDS):
+        response = _client.chat.completions.create(
+            model = LLM_MODEL,
+            messages = messages,
+            tools = TOOL_DEFINITIONS,
+        )
+
+        response_message = response.choices[0].message
+        tool_calls = response_message.tool_calls
+
+        # Step 4: No tool calls requested - return final text response to user
+        if not tool_calls:
+            return response_message.content or ""
+
+        # Milestone 2: Step 3a | Sequence Enforcment
+        # Assistant message with tool_calls MUST be appended before tool result messages
+        messages.append(response_message)
+
+        # Milestone 2: Step 3b | Execute Tools and Append Output
+        for tool_call in tool_calls:
+            tool_name = tool_call.function.name
+            try:
+                tool_args = json.loads(tool_call.function.arguments or "{}")
+            except json.JSONDecodeError:
+                tool_args = {}
+
+            # Route through dispatch_tool
+            tool_result_str = dispatch_tool(tool_name, tool_args)
+
+            # Append tool response referencing tool_call_id
+            messages.append({
+                "role": "tool",
+                "tool_call_id": tool_call.id,
+                "content": tool_result_str,
+            })
+
+    # Milestone 2: Infinite Loop Safety Valve
+    # Set exit conditions when MAX_TOOL_ROUNDS limit is reached
+    return "I reached the maximum operational steps without finalizing an answer. Kindly rephrase your question."
+
+        

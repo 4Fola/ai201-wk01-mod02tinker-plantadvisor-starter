@@ -52,10 +52,43 @@ def lookup_plant(plant_name: str) -> dict:
 
     Before writing code, complete the lookup_plant section of specs/tool-functions-spec.md.
     """
+    # Milestone 1: Input Normalization
+    # Handling empty/invalid inputs and normalize casing and whitespace
+    if not plant_name or not isinstance(plant_name, str):
+        return {
+            "found": False,
+            "name": plant_name,
+            "message": "Please provide a valid plant name to look up.",
+        }
+    normalized_input = plant_name.strip().lower()
+
+    # Milestone 1: Search Order & Alias Matching
+    # Iterates through _plant_db evaluating slugs, displa_name, and aliases
+    for slug, plant_info in _plant_db.items():
+        #1. Direct slug key match (e.g., 'snake_plant')
+        if slug.lower() == normalized_input:
+            return {"found": True, "plant": plant_info}
+
+        #2. Display name match (e.g., 'Snake Plant')
+        display_name = plant_info.get("display_name", "").lower()
+        if display_name == normalized_input:
+            return {"found": True, "plant": plant_info}
+
+        #3. Alias list match (e.g., 'sansevieria', "mother-in-law's tongue")
+        aliases = [alias.lower() for alias in plant_info.get("aliases", [])]
+        if normalized_input in aliases:
+            return{"found": True, "plant": plant_info}
+
+    # Milestone 1 & 3: Not-Found Message Design & Graceful Degradation
+    # Clear inofrmative message enabling the LLM to degrade gracefully
     return {
-        "found": False,
+        "found" : False,
         "name": plant_name,
-        "message": "Plant lookup not yet implemented. Complete Milestone 1.",
+        "message": (
+            f" No plant matching '{plant_name}' was found in the database. "
+            "Acknowledge that this plant is missing from the database, offer general care tips"
+            "if applicable based on plat type, and do not invent specific care instructions."
+        ),
     }
 
 
