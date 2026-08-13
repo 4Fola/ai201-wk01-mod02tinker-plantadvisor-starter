@@ -64,17 +64,19 @@ Open `specs/system-design.md`. Read the whole thing before opening any code file
 
 ## Security Tools 
 Phase 1 : Static Application Security Testing (SAST)
-Bandit (Python Security Scanner)
-Semgrep (Customable Pattern Matcher)
+- Bandit (Python Security Scanner)
+- Semgrep (Customable Pattern Matcher)
 
 Phase 2 : Dependency & CVE Scanning (Software Composition Analysis - SCA)
 ```
 Scan project dependencies (requirements.txt) for known Common Vulnerabilities and Exposures (CVEs).
 ```
-pip-audit
-Safety
+- pip-audit
+- Safety
 
 Phase 3: Dynamic Application Security Testing (DAST)
+```
 OWASP ZAP (Zed Attack Proxy)
 ├── CI/CD Automation (GitHub Actions Workflow)
 ├── Addressing CVE Issues & Viewing Results in GUI Format
+```
