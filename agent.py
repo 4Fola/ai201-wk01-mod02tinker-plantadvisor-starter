@@ -134,8 +134,8 @@ def run_agent(user_message: str, history: list) -> str:
     """
     # return "🌱 Agent not yet implemented. Complete Milestone 2 to activate the Plant Advisor."
 
-    # Milsetone 2: Step 1 - Build Messages List
-    messages = [{"role": "sytem", "content": SYSTEM_PROMPT}]
+    # Milestone 2: Step 1 - Build Messages List
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
 
     # Format and append historical context from Gradio history
     if history:
@@ -145,16 +145,28 @@ def run_agent(user_message: str, history: list) -> str:
             elif isinstance(item, (list, tuple)) and len(item) == 2:
                 messages.append({"role": "assistant", "content": item[1]})
 
-    # Append cuurent user turn
+    # Append current user turn
     messages.append({"role": "user", "content": user_message})
 
     # Milestone 2: Step 2 & 3 | ReAct Agent Tool Execution Loop
     for _ in range(MAX_TOOL_ROUNDS):
-        response = _client.chat.completions.create(
-            model = LLM_MODEL,
-            messages = messages,
-            tools = TOOL_DEFINITIONS,
-        )
+        try:
+            response = _client.chat.completions.create(
+                model = LLM_MODEL,
+                messages = messages,
+                tools = TOOL_DEFINITIONS,
+            )
+        except Exception as e:
+            err_str = str(e)
+            # Provide a clearer message for a common configuration issue
+            if "model_not_found" in err_str or "does not exist" in err_str or "do not have access" in err_str:
+                return (
+                    "The configured LLM model appears invalid or inaccessible. "
+                    "Please set the `LLM_MODEL` environment variable to a model you have access to, "
+                    "or check your Groq API account permissions."
+                )
+            # Re-raise unexpected errors so they surface for debugging
+            raise
 
         response_message = response.choices[0].message
         tool_calls = response_message.tool_calls

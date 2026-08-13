@@ -1,8 +1,12 @@
 # Plant Advisor — AI201 Lab 2 Starter
 
+# 👉 [Read Me](README.md) | [AI Bill of Materials (AI-BOM)](AIBOM.md) | [Model Card](model_card.md) |
+
 A conversational agent that helps users care for their houseplants. Ask it anything about a plant in its database and it will look up the care requirements, check the current seasonal context, and give you specific, grounded advice.
 
 The app is built and running. The agent isn't functional yet — that's the lab.
+
+<img src="Plant_Advisor_demo.gif" alt="Plant_Advisor_demo">
 
 ---
 

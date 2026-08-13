@@ -106,17 +106,17 @@ NB:
 
 **Test: does `"devil's ivy"` return the pothos entry?**
 ```
-[yes / no — if no, describe what happened]
+Yes! It does.
 ```
 
 **Test: does `"SNAKE PLANT"` return the snake plant entry?**
 ```
-[yes / no — if no, describe what happened]
+Yes, it does.
 ```
 
 **One edge case you discovered while implementing:**
 ```
-[your answer here]
+Adding just a variation of the first few word of the alias name, e.g. devils, devi, etc. still yields the expected output. However, using a scond word of the alias names yields no result. e.g, ivy, iv, vy etc.
 ```
 
 ---
@@ -211,5 +211,5 @@ Returned season: [season]
 
 **Test: does calling with `season="winter"` return winter data regardless of the current month?**
 ```
-[yes / no]
+Yes!
 ```
