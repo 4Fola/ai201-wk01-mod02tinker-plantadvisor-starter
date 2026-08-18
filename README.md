@@ -80,6 +80,9 @@ Scan project dependencies (requirements.txt) for known Common Vulnerabilities an
 - pip-audit
     - pip-audit -r requirements.txt -f markdown -o cve_report.md
 - Safety
+    - pip install safety
+    - safety check --full-report
+    - safety check --full-report --output html > safety_report.md
 
 Phase 3: Dynamic Application Security Testing (DAST)
 ```
