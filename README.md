@@ -65,13 +65,20 @@ Open `specs/system-design.md`. Read the whole thing before opening any code file
 ## Security Tools 
 Phase 1 : Static Application Security Testing (SAST)
 - Bandit (Python Security Scanner)
+    - pip install bandit
+    - Run scan and save HTML report
+    - bandit -r . -f html -o bandit_report.html
 - Semgrep (Customable Pattern Matcher)
+    - pip install semgrep
+    - Run security rulesets
+    - semgrep --config p/ci
 
 Phase 2 : Dependency & CVE Scanning (Software Composition Analysis - SCA)
 ```
 Scan project dependencies (requirements.txt) for known Common Vulnerabilities and Exposures (CVEs).
 ```
 - pip-audit
+    - pip-audit -r requirements.txt -f markdown -o cve_report.md
 - Safety
 
 Phase 3: Dynamic Application Security Testing (DAST)
@@ -80,3 +87,13 @@ OWASP ZAP (Zed Attack Proxy)
 ├── CI/CD Automation (GitHub Actions Workflow)
 ├── Addressing CVE Issues & Viewing Results in GUI Format
 ```
+## STRIDE Threat Modeling Matrix
+
+| Threat Category | Applied Risk in Plant Advisor | Mitigation Strategy |
+| :--- | :--- | :--- |
+| **Spoofing** | Unauthorized API usage or fake client calls. | Enforce environment-variable-backed API authentication; secure web UI ports. |
+| **Tampering** | Prompt injection changing tool parameters. | Enforce rigid type constraints in function parameter schemas. |
+| **Repudiation** | Inability to track unhandled errors or invalid requests. | Implement explicit console logger (dispatch_tool execution logging). |
+| **Information Disclosure** | Exposing GROQ_API_KEY or stack traces in Web UI. | Mask API keys in UI/logs; catch exceptions gracefully in agent loop. |
+| **Denial of Service** | Infinite tool execution loops draining API credits. | Explicit MAX_TOOL_ROUNDS = 5 circuit breaker. |
+| **Elevation of Privilege** | Execution of unauthorized local code via tool inputs. | Restrict tools strictly to local dictionary lookups; avoid eval(). |

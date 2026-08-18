@@ -1,0 +1,47 @@
+
+Name | Version | ID | Fix Versions
+--- | --- | --- | ---
+[python-dotenv](https://pypi.org/project/python-dotenv/) | 1.0.1 | [PYSEC-2026-2270](https://osv.dev/vulnerability/PYSEC-2026-2270) | 1.2.2
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-64](https://osv.dev/vulnerability/PYSEC-2026-64) | 6.7.0
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-63](https://osv.dev/vulnerability/PYSEC-2026-63) | 6.6.0
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-66](https://osv.dev/vulnerability/PYSEC-2026-66) | 6.6.0
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-65](https://osv.dev/vulnerability/PYSEC-2026-65) | 6.6.0
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-63](https://osv.dev/vulnerability/PYSEC-2026-63) | 6.6.0
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-66](https://osv.dev/vulnerability/PYSEC-2026-66) | 6.6.0
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-65](https://osv.dev/vulnerability/PYSEC-2026-65) | 6.6.0
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-64](https://osv.dev/vulnerability/PYSEC-2026-64) | 6.7.0
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-211](https://osv.dev/vulnerability/PYSEC-2026-211) | 
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-2179](https://osv.dev/vulnerability/PYSEC-2026-2179) | 6.16.0
+[gradio](https://pypi.org/project/gradio/) | 5.50.0 | [PYSEC-2026-2178](https://osv.dev/vulnerability/PYSEC-2026-2178) | 6.15.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-165](https://osv.dev/vulnerability/PYSEC-2026-165) | 12.2.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-165](https://osv.dev/vulnerability/PYSEC-2026-165) | 12.2.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2250](https://osv.dev/vulnerability/PYSEC-2026-2250) | 12.2.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2253](https://osv.dev/vulnerability/PYSEC-2026-2253) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2251](https://osv.dev/vulnerability/PYSEC-2026-2251) | 12.2.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2255](https://osv.dev/vulnerability/PYSEC-2026-2255) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2257](https://osv.dev/vulnerability/PYSEC-2026-2257) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2256](https://osv.dev/vulnerability/PYSEC-2026-2256) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2254](https://osv.dev/vulnerability/PYSEC-2026-2254) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2252](https://osv.dev/vulnerability/PYSEC-2026-2252) | 12.2.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2249](https://osv.dev/vulnerability/PYSEC-2026-2249) | 12.1.1
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2874](https://osv.dev/vulnerability/PYSEC-2026-2874) | 12.2.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-3453](https://osv.dev/vulnerability/PYSEC-2026-3453) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-3451](https://osv.dev/vulnerability/PYSEC-2026-3451) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2254](https://osv.dev/vulnerability/PYSEC-2026-2254) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2253](https://osv.dev/vulnerability/PYSEC-2026-2253) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2256](https://osv.dev/vulnerability/PYSEC-2026-2256) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-2255](https://osv.dev/vulnerability/PYSEC-2026-2255) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-3451](https://osv.dev/vulnerability/PYSEC-2026-3451) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-3453](https://osv.dev/vulnerability/PYSEC-2026-3453) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-3454](https://osv.dev/vulnerability/PYSEC-2026-3454) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-3495](https://osv.dev/vulnerability/PYSEC-2026-3495) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-3496](https://osv.dev/vulnerability/PYSEC-2026-3496) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-3494](https://osv.dev/vulnerability/PYSEC-2026-3494) | 12.3.0
+[pillow](https://pypi.org/project/pillow/) | 11.3.0 | [PYSEC-2026-3493](https://osv.dev/vulnerability/PYSEC-2026-3493) | 12.3.0
+[starlette](https://pypi.org/project/starlette/) | 0.52.1 | [PYSEC-2026-161](https://osv.dev/vulnerability/PYSEC-2026-161) | 1.0.1
+[starlette](https://pypi.org/project/starlette/) | 0.52.1 | [PYSEC-2026-161](https://osv.dev/vulnerability/PYSEC-2026-161) | 1.0.1
+[starlette](https://pypi.org/project/starlette/) | 0.52.1 | [PYSEC-2026-248](https://osv.dev/vulnerability/PYSEC-2026-248) | 1.3.0
+[starlette](https://pypi.org/project/starlette/) | 0.52.1 | [PYSEC-2026-249](https://osv.dev/vulnerability/PYSEC-2026-249) | 1.3.1
+[starlette](https://pypi.org/project/starlette/) | 0.52.1 | [PYSEC-2026-248](https://osv.dev/vulnerability/PYSEC-2026-248) | 1.3.0
+[starlette](https://pypi.org/project/starlette/) | 0.52.1 | [PYSEC-2026-2281](https://osv.dev/vulnerability/PYSEC-2026-2281) | 1.1.0
+[starlette](https://pypi.org/project/starlette/) | 0.52.1 | [PYSEC-2026-2280](https://osv.dev/vulnerability/PYSEC-2026-2280) | 1.1.0
