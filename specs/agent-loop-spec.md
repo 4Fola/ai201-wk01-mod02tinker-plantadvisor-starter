@@ -173,7 +173,7 @@ Final response: [brief description]
 **What happens when you ask about a plant that isn't in the database?**
 
 ```
-[describe the behavior you observed]
+It acknowledges not having the plant in the database and in some cases tries to infer the plant based on the name provided especially when the spelling is wrong or the name closely related.
 ```
 
 **One thing about the tool call API that surprised you:**

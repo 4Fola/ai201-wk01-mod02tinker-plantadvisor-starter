@@ -32,9 +32,12 @@ agent.py  ───────────────────────�
   │
   ├── lookup_plant(plant_name)
   │       └── tools.py  ──────────────────────────────────────►  plants.json
+  ├── get_plant_list(plant_name)
+  │       └── tools.py  ──────────────────────────────────────►  plants.json
   │
   └── get_seasonal_conditions(season)
           └── tools.py  ──────────────────────────────────────►  seasons.json
+
 ```
 
 ---
@@ -85,6 +88,25 @@ Tool functions (`tools.py`) are pure data retrieval — they take arguments and 
 4. Open `specs/tool-functions-spec.md` and complete the blank fields.
 5. Implement `lookup_plant()` and `get_seasonal_conditions()`.
 6. Then move to `specs/agent-loop-spec.md` and `run_agent()`.
+
+---
+# OPTIONAL CHALLENGE
+
+## 1 | What causes the agent to hit MAX_TOOL_ROUNDS?
+
+**Multi-Plant Comparison Queries:** Asking a complex prompt requiring sequential single-plant lookups across many items (e.g., "Compare watering, light, and winter adjustments for pothos, snake plant, monstera, fiddle leaf fig, and calathea"). Because the agent calls **lookup_plant** sequentially for each plant and then calls **get_seasonal_conditions**, it easily exceeds the 5-round limit **(MAX_TOOL_ROUNDS = 5)**.
+
+**Ambiguous Tool Output Loops:** If a tool returns vague output or {"found": false} and the LLM re-tries slightly different spellings repeatedly without giving up.
+
+## 2 | What does the agent return right now? 
+Currently, when MAX_TOOL_ROUNDS is reached, agent.py returns a hardcoded error string:
+**"I reached the maximum operational steps without finalizing an answer. Please rephrase your question."**
+
+## 3 | Is that the right behavior, and how should it be changed? 
+No, it is not the ideal behavior. While a hard stop prevents infinite loops and API credit exhaustion, throwing away all retrieved data leaves the user with an unhelpful error after the agent already collected useful information.
+
+**The Recommended Solution (Graceful Fallback Synthesis):**
+When MAX_TOOL_ROUNDS is reached, instead of immediately returning a static error message, we'll perform one final generation call to the LLM without tools attached, instructing it to summarize whatever partial tool data it has gathered so far.
 
 ---
 

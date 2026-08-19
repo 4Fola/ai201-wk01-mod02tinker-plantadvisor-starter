@@ -138,24 +138,34 @@ def run_agent(user_message: str, history: list) -> str:
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
 
     # Format and append historical context from Gradio history
+    # Optional Challenge: Multi-Turn Conversation Memory
+    # Robustly parses both Gradio dict history format and tuple history format
     if history:
         for item in history:
-            if isinstance(item, dict):
+            if isinstance(item, dict) and "role" in item and "content" in item:
                 messages.append(item)
             elif isinstance(item, (list, tuple)) and len(item) == 2:
-                messages.append({"role": "assistant", "content": item[1]})
+                user_text, assistant_text = item
+                if user_text:
+                    messages.append({"role": "user", "content": user_text})
+                if assistant_text:
+                    messages.append({"role": "assistant", "content": assistant_text})
 
     # Append current user turn
+    # messages.append({"role": "assistant", "content": item[1]})
     messages.append({"role": "user", "content": user_message})
 
     # Milestone 2: Step 2 & 3 | ReAct Agent Tool Execution Loop
+    collected_tool_results = []
     for _ in range(MAX_TOOL_ROUNDS):
         try:
             response = _client.chat.completions.create(
-                model = LLM_MODEL,
-                messages = messages,
-                tools = TOOL_DEFINITIONS,
+                model=LLM_MODEL,
+                messages=messages,
+                tools=TOOL_DEFINITIONS,
+                tool_choice="auto",
             )
+
         except Exception as e:
             err_str = str(e)
             # Provide a clearer message for a common configuration issue
@@ -190,15 +200,36 @@ def run_agent(user_message: str, history: list) -> str:
             # Route through dispatch_tool
             tool_result_str = dispatch_tool(tool_name, tool_args)
 
-            # Append tool response referencing tool_call_id
             messages.append({
                 "role": "tool",
                 "tool_call_id": tool_call.id,
                 "content": tool_result_str,
             })
+            collected_tool_results.append(tool_result_str)
 
     # Milestone 2: Infinite Loop Safety Valve
     # Set exit conditions when MAX_TOOL_ROUNDS limit is reached
-    return "I reached the maximum operational steps without finalizing an answer. Kindly rephrase your question."
+    fallback_response = _client.chat.completions.create(
+        model=LLM_MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are a plant care advisor. Answer the user's question using only "
+                    "the provided collected data. Do not call tools or request more data. "
+                    "Clearly mention when the data is incomplete."
+                ),
+            },
+            {"role": "user", "content": user_message},
+            {
+                "role": "user",
+                "content": "Collected tool results:\n" + "\n".join(collected_tool_results),
+            },
+        ],
+    )
+    return (
+        fallback_response.choices[0].message.content
+        or "I reached the maximum operational steps and could only retrieve partial information."
+    )
 
         
