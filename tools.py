@@ -117,3 +117,24 @@ def get_seasonal_conditions(season: str | None = None) -> dict:
     result = dict(_season_data[season_key])
     result["detected_season"] = detected
     return result
+
+    # Optional Challenge: Third Tool Implementation
+    def get_plant_list() -> dict:
+        """
+        This returns a summuary list of all houseplants in the local database.
+        Enables recommendations based on beginner-friendliness / difficulty level.
+        """
+
+    catalog = []
+    for slug, info in _plant_db.items():
+        catalog.appemd({
+            "slug": slug,
+            "display_name": info.get("display_name", slug),
+            "care_level": info.get("care_level", info.get("difficulty", "easy")),
+            "light_summary": info.get("light", "Inddirect light")
+        })
+
+    return {
+        "count": len(catalog),
+        "plants": catalog
+    }
